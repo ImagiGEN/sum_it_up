@@ -1,0 +1,5 @@
+pandas
+SQLAlchemy
+python-dotenv
+cloud-sql-python-connector[pg8000]
+streamlit
