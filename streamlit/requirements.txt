@@ -3,3 +3,6 @@ SQLAlchemy
 python-dotenv
 cloud-sql-python-connector[pg8000]
 streamlit
+pinecone-client
+openai
+google-cloud-storage

@@ -1,4 +1,8 @@
 import streamlit as st
+from dotenv import load_dotenv
+import google.cloud.storage as gcs
+
+load_dotenv()
 
 st.set_page_config(
     page_title="Home Page",
