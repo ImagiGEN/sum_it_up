@@ -6,3 +6,5 @@ streamlit
 pinecone-client
 openai
 google-cloud-storage
+langchain
+tiktoken

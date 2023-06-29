@@ -29,14 +29,10 @@ file_name = st.selectbox(label='File', options=file_names)
 
 openai_api_key = st.text_input('OpenAI API Key')
 
-metrics = st.checkbox("Display metrics")
-
 if st.button("Generate Summary"):
     if not openai_api_key or not file_name or not year or not month or not company_name:
         st.write("Please fill out all the above details")
-    summary = summarization.summarize_docs(openai_api_key, file_name)
-    if summary:
-        if metrics:
-            st.write(summary)
-        else:
-            st.write(summary["choices"][0]["text"])
+    # summary = summarization.summarize_docs(openai_api_key, file_name)
+    with st.spinner(text="In progress..."):
+        summary = summarization.generate_summary(openai_api_key, file_name)
+    st.write(summary)
