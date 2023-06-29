@@ -8,7 +8,7 @@ from langchain.llms.openai import OpenAI
 from langchain.vectorstores.pinecone import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains.summarize import load_summarize_chain
-from langchain.document_loaders import PyPDFLoader, TextLoader
+from langchain.document_loaders import TextLoader
 
 index_name = "extractive-question-answering"
 environment = os.environ.get("PINECONE_ENV", "asia-southeast1-gcp-free")
@@ -63,20 +63,14 @@ def generate_summary(openai_api_key, file_name):
         
         with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
             tmp_file.write(words)
-        
-        # loader = PyPDFLoader(tmp_file.name)
-        # pages = loader.load_and_split()
-        # os.remove(tmp_file.name)
+
         loader = TextLoader(tmp_file.name)
         pages = loader.load_and_split()
         os.remove(tmp_file.name)
         
         init_pinecone()
         # Create embeddings for the pages and insert into Pinecone vector database
-        # pinecone.init(api_key=pinecone_api_key, environment=pinecone_env)
-        # words = generic.fetch_file_from_gcs(file_name).decode() 
         embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-        # embeddings.embed_documents(words)
         vectordb = Pinecone.from_documents(pages, embeddings, index_name=index_name)
 
         # Initialize the OpenAI module, load and run the summarize chain
