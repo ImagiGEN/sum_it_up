@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 from utils import database, summarization, generic
 
-st.title('Generate Summary')
+st.title('Generate Summary (Langchain)')
 
 @st.cache_data
 def get_metadata():
@@ -28,15 +28,11 @@ file_names = [generic.get_filename_from_gurl(file) for file in file_urls if '.tx
 file_name = st.selectbox(label='File', options=file_names)
 
 openai_api_key = st.text_input('OpenAI API Key')
-metrics = st.checkbox("Display answer metrics")
 
 if st.button("Generate Summary"):
     if not openai_api_key or not file_name or not year or not month or not company_name:
         st.write("Please fill out all the above details")
     # summary = summarization.summarize_docs(openai_api_key, file_name)
     with st.spinner(text="In progress..."):
-        summary = summarization.summarize_docs(openai_api_key, file_name)
-    if metrics:
-        st.write(summary)
-    else:
-        st.write(summary["choices"][0]["text"])
+        summary = summarization.generate_summary(openai_api_key, file_name)
+    st.write(summary)

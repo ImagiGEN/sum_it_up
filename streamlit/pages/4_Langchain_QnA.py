@@ -1,8 +1,8 @@
 import pandas as pd
 import streamlit as st
-from utils import database, generic, pinecone_utils
+from utils import database, generic, langchain
 
-st.title('Pinecone Answers')
+st.title('Pinecone QnA')
 
 @st.cache_data
 def get_metadata():
@@ -35,22 +35,11 @@ file_name = st.selectbox(label='File', options=file_names)
 
 openai_api_key = st.text_input('Open AI API key')
 
-if st.button("Upload file"):
-    st.session_state.context = False
-    with st.spinner(text="Setting context..."):
-        pinecone_utils.store_embeddings_pinecone(file_name, openai_api_key)
-    st.session_state.context = True
+question = st.text_input('Ask questions here')
 
-if st.session_state.context:
-    question = st.text_input('Ask questions here')
-    metrics = st.checkbox("Display answer metrics")
-    
-    if st.button("Send"):
-        with st.spinner(text="Responding..."):
-            st.session_state.answer = pinecone_utils.get_answer(question, openai_api_key)
+if st.button("Send"):
+    with st.spinner(text="Responding..."):
+        st.session_state.answer = langchain.get_answer(file_name, openai_api_key, question)
 
-if st.session_state.answer:    
-    if metrics:
-        st.write(st.session_state.answer)
-    else:
-        st.write(st.session_state.answer[0]["text"])
+if st.session_state.answer:
+    st.write(st.session_state.answer)  
