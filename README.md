@@ -15,6 +15,41 @@ We aim to deliver a high-quality, user-friendly application that empowers financ
 
 ## Project Tree 
 
+```
+.
+├── CaseStudy.ipynb
+├── Makefile
+├── README.md
+├── airflow
+│   ├── Dockerfile
+│   ├── dags
+│   │   └── fetch_transcript.py
+│   └── requirements.txt
+├── diagrams
+│   ├── architecture.png
+│   ├── architecture.py
+│   └── myresources
+│       ├── langchain.jpg
+│       ├── pinecone.jpg
+│       └── streamlit.jpg
+├── docker-compose-local.yml
+└── streamlit
+    ├── Dockerfile
+    ├── Home.py
+    ├── pages
+    │   ├── 1_Summary_Generator.py
+    │   ├── 2_Contextual_QnA.py
+    │   ├── 3_Langchain_Summary_Generator.py
+    │   └── 4_Langchain_QnA.py
+    ├── requirements.txt
+    └── utils
+        ├── __init__.py
+        ├── database.py
+        ├── generic.py
+        ├── langchain.py
+        ├── pinecone_utils.py
+        └── summarization.py
+```
 ## Contributions
 | Contributor    | Work |
 | -------- | ------- |
