@@ -1,13 +1,19 @@
 import pandas as pd
 import streamlit as st
-from utils import database, summarization, generic
+from utils import database, generic, langchain
 
-st.title('Generate Summary')
+st.title('Pinecone QnA')
 
 @st.cache_data
 def get_metadata():
     metadata = database.fetch_metadata_from_db()
     return metadata
+
+if 'context' not in st.session_state:
+	st.session_state.context = False
+
+
+st.session_state.answer = None
 
 metadata = get_metadata()
 
@@ -27,16 +33,13 @@ file_names = [generic.get_filename_from_gurl(file) for file in file_urls if '.tx
 
 file_name = st.selectbox(label='File', options=file_names)
 
-openai_api_key = st.text_input('OpenAI API Key')
-metrics = st.checkbox("Display answer metrics")
+openai_api_key = st.text_input('Open AI API key')
 
-if st.button("Generate Summary"):
-    if not openai_api_key or not file_name or not year or not month or not company_name:
-        st.write("Please fill out all the above details")
-    # summary = summarization.summarize_docs(openai_api_key, file_name)
-    with st.spinner(text="In progress..."):
-        summary = summarization.summarize_docs(openai_api_key, file_name)
-    if metrics:
-        st.write(summary)
-    else:
-        st.write(summary["choices"][0]["text"])
+question = st.text_input('Ask questions here')
+
+if st.button("Send"):
+    with st.spinner(text="Responding..."):
+        st.session_state.answer = langchain.get_answer(file_name, openai_api_key, question)
+
+if st.session_state.answer:
+    st.write(st.session_state.answer)  
