@@ -27,7 +27,7 @@ file_names = [generic.get_filename_from_gurl(file) for file in file_urls if '.tx
 
 file_name = st.selectbox(label='File', options=file_names)
 
-openai_api_key = st.text_input('OpenAI API Key')
+openai_api_key = st.text_input('OpenAI API Key', type='password')
 metrics = st.checkbox("Display answer metrics")
 
 if st.button("Generate Summary"):
