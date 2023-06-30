@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 from utils import database, generic, pinecone_utils
 
-st.title('Pinecone Answers')
+st.title('QnA backed by Pinecone')
 
 @st.cache_data
 def get_metadata():
