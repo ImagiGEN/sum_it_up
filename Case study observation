@@ -1,0 +1,20 @@
+The notebook uses the Deduplication Dataset 2020, which consists of 100,000 scholarly documents. 
+The dataset contains information such as core_id, DOI, original abstract, original title, processed title, processed abstract, category, and labelled duplicates.
+The goal of the notebook is to create a data deduplication application for eliminating near-duplicate copies of academic texts. 
+It performs the deduplication in two steps: similarity search and near-duplication detection.
+
+The Vector representation of the texts to perform a similarity search. 
+It uses the SentenceTransformer library and the Average Word Embedding GloVe model to generate embeddings for the texts.
+
+Pinecone is a vector database used for storing and querying the embeddings. 
+It connects to the Pinecone environment, creates or retrieves an index named ‘deduplication’, and inserts the embeddings into the index.
+After indexing the embeddings, it creates a test set by sampling articles from the dataset. 
+It queries the Pinecone index to retrieve the most similar articles for each test article.
+It calculates the retrieval recall, which measures the effectiveness of the similarity search by comparing the retrieved articles with the labelled duplicates.
+
+A deduplication classifier based on Locality-Sensitive Hashing (LSH) to detect duplicates among the retrieved articles.
+It creates MinHash signatures for each article and uses an LSH index to find potential duplicates based on the similarity of the signatures.
+It compares the predicted duplicates with the labelled duplicates from the dataset and calculates the accuracy of the classifier.
+
+•	The similarity search achieves a high retrieval recall, with a mean of approximately 0.97 and a standard deviation of 0.16. This indicates that the search successfully retrieves a large portion of the labelled duplicates for the test articles.
+•	The deduplication classifier based on LSH is applied to a sample of the query results. It compares the predicted duplicates with the labelled duplicates and calculates the accuracy. 
