@@ -53,4 +53,4 @@ if st.session_state.answer:
     if metrics:
         st.write(st.session_state.answer)
     else:
-        st.write(st.session_state.answer[0]["text"])
+        st.write(st.session_state.answer[0]["answer"])
