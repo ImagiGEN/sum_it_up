@@ -1,6 +1,5 @@
 from tqdm import tqdm
 import pinecone
-from sentence_transformers import SentenceTransformer
 from utils import generic
 from transformers import pipeline
 from pprint import pprint

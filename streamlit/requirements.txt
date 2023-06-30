@@ -8,3 +8,6 @@ openai
 google-cloud-storage
 langchain
 tiktoken
+tiktoken
+transformers
+sentence_transformers

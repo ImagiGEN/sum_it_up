@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY Home.py requirements.txt ./
 COPY pages ./pages
-COPY utils ./pages
+COPY utils ./utils
 # COPY .streamlit ./.streamlit
 # Copy source code and dependency
 
