@@ -1,4 +1,4 @@
-# Assignment2
+# TranscriptQuery Pro
 The primary objective of this assignment is to create a system that incorporates vector similarity search, traditional filtering, and hybrid search features. The application will serve as a valuable tool for financial analysts, enabling them to efficiently search for relevant information within earnings call transcripts.
 
 ## Project Resources
@@ -50,9 +50,3 @@ We aim to deliver a high-quality, user-friendly application that empowers financ
         ├── pinecone_utils.py
         └── summarization.py
 ```
-## Contributions
-| Contributor    | Work |
-| -------- | ------- |
-| Ashritha Goramane  | Contextual Pinecone QnA,  Langchain Summarization             |
-| Rishabh Indoria    | CloudSQL metadata extraction DAG, Langchain QnA               |
-| Parvati Sohani     | Deduplication Summary, Generic Summarization, Documentation   |
